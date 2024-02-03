@@ -1,0 +1,43 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-8 offset-md-2">
+  <h1>All Records</h1>
+  <a href="{% url 'add_record' %}" class="btn btn-primary">Add Record</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zipcode</th>
+        <th>Created At</th>
+        <th>ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if records %}
+        {% for record in records %}
+          <tr>
+            <td>{{ record.first_name }} {{ record.last_name }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.phone }}</td>
+            <td>{{ record.address }}</td>
+            <td>{{ record.city }}</td>
+            <td>{{ record.state }}</td>
+            <td>{{ record.zipcode }}</td>
+            <td>{{ record.created_at }}</td>
+            <td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+</div>
+
+{% endblock %}

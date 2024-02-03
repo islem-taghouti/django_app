@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-8 offset-md-2">
+  <h1>All Orders</h1>
+  <a href="{% url 'add_order' %}" class="btn btn-primary mb-3">Add Order</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Record</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in all_orders_list %}
+        <tr>
+          <td>{{ order.record.first_name }} {{ order.record.last_name }}</td>
+          <td>{{ order.total_amount }}</td>
+          <td>{{ order.status }}</td>
+          <td>
+          <a href="{% url 'update_order' order.id %}" class="btn btn-warning btn-sm">Update</a>
+          <a href="{% url 'delete_order' order.id %}" class="btn btn-danger btn-sm">Delete</a>        
+        </td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+</div>
+
+{% endblock %}

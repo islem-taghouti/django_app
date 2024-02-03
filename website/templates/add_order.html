@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+  <h1>Add Order</h1>
+  <br/>
+
+  <form method="POST" action="{% url 'add_order' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="record" class="form-label">Select Record</label>
+      {{ form.record }}
+    </div>
+
+    <div class="mb-3">
+      <label for="total_amount" class="form-label">Total Amount</label>
+      {{ form.total_amount }}
+    </div>
+
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      {{ form.status }}
+    </div>
+
+    <br/>
+    <button type="submit" class="btn btn-secondary">Add Order</button>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+  </form>
+
+</div>
+
+{% endblock %}

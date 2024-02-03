@@ -1,7 +1,10 @@
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Record
+from .models import Order
+
 
 class SignUpForm(UserCreationForm):
 	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -49,3 +52,21 @@ class AddRecordForm(forms.ModelForm):
 	class Meta:
 		model = Record
 		exclude = ("user",)
+class AddOrderForm(forms.ModelForm):
+    total_amount = forms.DecimalField(
+        required=True,
+        widget=forms.widgets.TextInput(attrs={"placeholder": "Total Amount", "class": "form-control"}),
+        label=""
+    )
+    status = forms.CharField(
+        required=True,
+        widget=forms.widgets.TextInput(attrs={"placeholder": "Status", "class": "form-control"}),
+        label=""
+    )
+
+    class Meta:
+        model = Order
+        fields = ['total_amount', 'status','record']
+    def __init__(self, *args, **kwargs):
+        super(AddOrderForm, self).__init__(*args, **kwargs)
+        self.fields['record'].queryset = Record.objects.all()	
